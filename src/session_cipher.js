@@ -160,7 +160,7 @@ class SessionCipher {
                 if (e.name == "MessageCounterError") break;
             }
         }
-        console.error("[BOTCAHX] Skip decrypt message");
+        console.error("👨‍💻 [ MR-NIMA ] Skip decrypt message");
         for (const e of errs) {
             ////console.error("Session error:" + e, e.stack);
         }
