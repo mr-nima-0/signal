@@ -1,4 +1,3 @@
-
 'use strict';
 
 const BaseKeyType = require('./base_key_type');
@@ -28,7 +27,7 @@ class SessionBuilder {
                                   device.signedPreKey.signature);
             const baseKey = curve.generateKeyPair();
             const devicePreKey = device.preKey && device.preKey.publicKey;
-            const session = await this.initSession(true, baseKey, undefined, device.identityKey,
+            const session = await this._initSession(true, baseKey, undefined, device.identityKey,
                                                    devicePreKey, device.signedPreKey.publicKey,
                                                    device.registrationId);
             session.pendingPreKey = {
@@ -70,7 +69,7 @@ class SessionBuilder {
         if (existingOpenSession) {
             record.archiveCurrentState();
         }
-        const session = await this.initSession(false, preKeyPair, signedPreKeyPair,
+        const session = await this._initSession(false, preKeyPair, signedPreKeyPair,
                                                  message.identityKey, message.baseKey,
                                                  undefined, message.registrationId);
         if (existingOpenSession && session && !Util.isEqual(existingOpenSession.indexInfo.remoteIdentityKey, session.indexInfo.remoteIdentityKey)) {
@@ -81,7 +80,7 @@ class SessionBuilder {
         return message.preKeyId;
     }
 
-    async initSession(isInitiator, ourEphemeralKey, ourSignedKey, theirIdentityPubKey,
+    async _initSession(isInitiator, ourEphemeralKey, ourSignedKey, theirIdentityPubKey,
                       theirEphemeralPubKey, theirSignedPubKey, registrationId) {
         if (isInitiator) {
             if (ourSignedKey) {
@@ -100,7 +99,7 @@ class SessionBuilder {
         } else {
             sharedSecret = new Uint8Array(32 * 5);
         }
-        for (var i = 0; i < 32; i++) {
+        for (let i = 0; i < 32; i++) {
             sharedSecret[i] = 0xff;
         }
         const ourIdentityKey = await this.storage.getOurIdentity();
@@ -137,10 +136,7 @@ class SessionBuilder {
             baseKeyType: isInitiator ? BaseKeyType.OURS : BaseKeyType.THEIRS,
             closed: -1
         };
-        if (isInitiator) {
-            // If we're initiating we go ahead and set our first sending ephemeral key now,
-            // otherwise we figure it out when we first maybeStepRatchet with the remote's
-            // ephemeral key
+        if (isInitiator) {          
             this.calculateSendingRatchet(session, theirSignedPubKey);
         }
         return session;
@@ -163,3 +159,7 @@ class SessionBuilder {
 }
 
 module.exports = SessionBuilder;
+
+
+        
+
