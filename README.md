@@ -1,64 +1,49 @@
-libsignal-node
+signal 
 ========
-Signal protocol implementation for Node.js based on
-[libsignal-protocol-javascript](https://github.com/WhisperSystems/libsignal-protocol-javascript).
+Implementasi Signal protocol untuk Node.js berbasis [signal-protocol-javascript] (https://github.com/hostinger-bot/signal).
 
 [![npm](https://img.shields.io/npm/v/libsignal.svg)](https://www.npmjs.com/package/libsignal)
 [![npm](https://img.shields.io/npm/l/libsignal.svg)](https://github.com/ForstaLabs/libsignal-node)
 
 
-Overview
+Ikhtisar
 --------
-A ratcheting forward secrecy protocol that works in synchronous and
-asynchronous messaging environments.
+Protokol yang memperhatikan kerahasiaan maju dan mengikuti lingkungan pesan sinkron dan asinkron.
 
 
 PreKeys
 --------
-This protocol uses a concept called 'PreKeys'. A PreKey is an ECPublicKey and
-an associated unique ID which are stored together by a server. PreKeys can also
-be signed.
+Protokol ini menggunakan konsep yang disebut 'PreKeys'. PreKey adalah ECPublicKey dan ID unik terkait yang disimpan bersama oleh server. PreKeys juga dapat ditandatangani.
 
-At install time, clients generate a single signed PreKey, as well as a large
-list of unsigned PreKeys, and transmit all of them to the server.
+Pada saat instalasi, klien menghasilkan satu PreKey yang ditandatangani, serta daftar besar unsigned PreKey, dan mengirimkan semuanya ke server.
 
 
-Sessions
+Sesi
 --------
-Signal Protocol is session-oriented. Clients establish a "session," which is
-then used for all subsequent encrypt/decrypt operations. There is no need to
-ever tear down a session once one has been established.
+Signal Protocol berorientasi pada sesi. Klien membuat "sesi", yang kemudian digunakan untuk semua operasi enkripsi / dekripsi selanjutnya. Tidak perlu pernah membongkar sesi setelah sesi telah dibuat.
 
-Sessions are established in one of two ways:
+Sesi dibuat dengan salah satu dari dua cara:
 
-1. PreKeyBundles. A client that wishes to send a message to a recipient can
-   establish a session by retrieving a PreKeyBundle for that recipient from the
-   server.
-2. PreKeySignalMessages. A client can receive a PreKeySignalMessage from a
-   recipient and use it to establish a session.
+1. PreKeyBundles. Klien yang ingin mengirim pesan ke penerima dapat membuat sesi dengan mengambil PreKeyBundle untuk penerima itu dari server.
+2. PreKeySignalMessages. Klien dapat menerima PreKeySignalMessage dari penerima dan menggunakannya untuk membuat sesi.
 
 
-State
+Negara
 --------
-An established session encapsulates a lot of state between two clients. That
-state is maintained in durable records which need to be kept for the life of
-the session.
+Sesi yang dibuat mencakup banyak keadaan antara dua klien. Negara itu dipelihara dalam catatan yang dapat diandalkan yang perlu dijaga selama hidup sesi.
 
-State is kept in the following places:
+Negara ditempatkan di tempat-tempat berikut:
 
-* Identity State. Clients will need to maintain the state of their own identity
-  key pair, as well as identity keys received from other clients.
-* PreKey State. Clients will need to maintain the state of their generated
-  PreKeys.
-* Signed PreKey States. Clients will need to maintain the state of their signed
-  PreKeys.
-* Session State. Clients will need to maintain the state of the sessions they
-  have established.
+* Negara Identitas. Klien akan perlu memelihara status pasangan kunci identitas mereka sendiri, serta kunci identitas yang diterima dari klien lain.
+* Negara PreKey. Klien perlu memelihara status PreKeys yang dihasilkan.
+* Status PreKey Tertanda. Klien perlu memelihara status PreKeys yang ditandatangani mereka.
+* Negara Sesi. Klien akan perlu memelihara status sesi yang telah mereka bentuk.
 
 
-License
+Lisensi
 --------
-Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html
+Dilisensikan di bawah GPLv3: http://www.gnu.org/licenses/gpl-3.0.html
 
-* Copyright 2015-2016 Open Whisper Systems
-* Copyright 2017-2018 Forsta Inc
+* Hak Cipta 2015-2016 Open Whisper Systems
+* Recode BOTCAHX 2022-2023
+* Hak Cipta 2017-2018 Forsta Inc
