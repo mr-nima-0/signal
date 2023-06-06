@@ -1,5 +1,3 @@
-// vim: ts=4:sw=4:expandtab
-
 exports.SignalError = class SignalError extends Error {};
 
 exports.UntrustedIdentityKeyError = class UntrustedIdentityKeyError extends exports.SignalError {
@@ -15,6 +13,7 @@ exports.SessionError = class SessionError extends exports.SignalError {
     constructor(message) {
         super(message);
         this.name = 'SessionError';
+        Object.setPrototypeOf(this, SessionError.prototype); 
     }
 };
 
@@ -22,6 +21,7 @@ exports.MessageCounterError = class MessageCounterError extends exports.SessionE
     constructor(message) {
         super(message);
         this.name = 'MessageCounterError';
+        Object.setPrototypeOf(this, MessageCounterError.prototype); 
     }
 };
 
@@ -29,5 +29,7 @@ exports.PreKeyError = class PreKeyError extends exports.SessionError {
     constructor(message) {
         super(message);
         this.name = 'PreKeyError';
+        Object.setPrototypeOf(this, PreKeyError.prototype); 
     }
 };
+
